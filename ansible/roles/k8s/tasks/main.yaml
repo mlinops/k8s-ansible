@@ -4,7 +4,7 @@
     cmd: mkdir -p -m 755 /etc/apt/keyrings
 
 - name: download k8s gpg key
-  shell: curl -fsSL "https://pkgs.k8s.io/core:/stable:/v{{ k8s_version }}/deb/Release.key"
+  shell: curl -fsSL "https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/Release.key"
   register: key_output
   changed_when: false
 
@@ -14,7 +14,7 @@
 - name: add entry to kubernetes.list file
   lineinfile:
     path: /etc/apt/sources.list.d/kubernetes.list
-    line: 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/v{{ k8s_version }}/deb/ /'
+    line: 'deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.k8s.io/core:/stable:/{{ k8s_version }}/deb/ /'
     create: yes
 
 - name: install required 
@@ -22,7 +22,7 @@
     name: "{{ item }}"
     state: present
     cache_valid_time: 3600
-    loop: "{{ k8s_features }}"
+  loop: "{{ k8s_features }}"
 
 - name: hold kubeadm, kubelet, and kubectl
   ansible.builtin.dpkg_selections:
@@ -38,7 +38,7 @@
 
 - name: Read existing content of /etc/modules-load.d/k8s.conf
   shell: cat /etc/modules-load.d/k8s.conf
-  register: existing_content
+  register: existing_modules_content
   ignore_errors: yes
 
 - name: Add kernel modules to k8s.conf if missing
@@ -59,7 +59,7 @@
 
 - name: read existing content of /etc/sysctl.d/k8s.conf
   shell: cat /etc/sysctl.d/k8s.conf
-  register: existing_content
+  register: existing_sysctl_content
   ignore_errors: yes
 
 - name: Configure sysctl settings if missing

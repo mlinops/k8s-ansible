@@ -2,7 +2,7 @@
 - name: precheck system files
   command: |
     rm /etc/apt/sources.list.d/kubernetes.list
-    rm /etc/apt/keyrings/kubernetes-apt-keyring.gpg'
+    rm /etc/apt/keyrings/kubernetes-apt-keyring.gpg
   ignore_errors: yes
 
 - name: install required packages
@@ -10,7 +10,7 @@
     name: "{{ item }}"
     state: latest
     cache_valid_time: 3600
-    loop: "{{ packages }}"
+  loop: "{{ packages }}"
 
 - name: enable docker service
   systemd:
