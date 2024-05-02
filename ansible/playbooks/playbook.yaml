@@ -1,0 +1,9 @@
+---
+- name: applying roles for deploy k8s worker features
+  hosts: workers
+  become: yes
+  roles: 
+    - system
+    - docker
+    - k8s
+    

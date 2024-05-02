@@ -1,0 +1,2 @@
+---
+packages: [ 'curl', 'git', 'ufw', 'apt-transport-https', 'ca-certificates', 'gpg', 'docker.io' ]
