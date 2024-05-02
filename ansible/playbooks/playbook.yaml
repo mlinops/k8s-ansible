@@ -4,6 +4,5 @@
   become: yes
   roles: 
     - system
-    - docker
     - k8s
     
