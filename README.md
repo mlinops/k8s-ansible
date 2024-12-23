@@ -4,7 +4,7 @@
 
 Clone this repository to your virtual machine that is functioning as an Ansible control node.
 ```
-git clone https://github.com/mlinops/rmq.git
+git clone https://github.com/mlinops/rmq.git](https://github.com/mlinops/k8s-ansible.git)
 ```
 Navigate to the project ansible directory.
 ```
